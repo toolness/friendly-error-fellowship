@@ -14,6 +14,26 @@
   var P5_CLASS_RE = /^p5\.([^.]+)$/;
   var docs = getReferenceDocs();
 
+  // Taken from p5's src/core/error_helpers.js.
+  function friendlyWelcome() {
+    // p5.js brand - magenta: #ED225D
+    var astrixBgColor = 'transparent';
+    var astrixTxtColor = '#ED225D';
+    var welcomeBgColor = '#ED225D';
+    var welcomeTextColor = 'white';
+    console.log(
+    '%c    _ \n'+
+    ' /\\| |/\\ \n'+
+    ' \\ ` \' /  \n'+
+    ' / , . \\  \n'+
+    ' \\/|_|\\/ '+
+    '\n\n%c> p5.js says: Welcome! '+
+    'This is your friendly debugger. ',
+    'background-color:'+astrixBgColor+';color:' + astrixTxtColor +';',
+    'background-color:'+welcomeBgColor+';color:' + welcomeTextColor +';'
+    );
+  }
+
   function createProxyForClassMethod(classitem, fn) {
     var showHelp = function() {
       var url = 'http://p5js.org/reference/#/' + classitem.class +
@@ -119,7 +139,5 @@
     }
   });
 
-  // TODO: Show the super-swanky p5 ascii art logo here, as per
-  // the original friendly debugger.
-  console.log("Friendly Debugger Ready.");
+  friendlyWelcome();
 }));
