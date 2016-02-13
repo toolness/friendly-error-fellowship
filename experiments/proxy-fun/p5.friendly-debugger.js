@@ -12,7 +12,44 @@
   }
 
   var P5_CLASS_RE = /^p5\.([^.]+)$/;
+  var USER_AGENT = typeof(navigator) !== 'undefined' && navigator.userAgent;
+  var CONSOLE_SUPPORTS_COLOR = (
+    // As of 2016-02-13, Microsoft Edge doesn't support console colors.
+    !/Edge\/\d+/.test(USER_AGENT)
+  );
   var docs = getReferenceDocs();
+
+  // Log a chunk of text with multiple CSS styles as a single console
+  // message on browsers that support it. Browsers that don't support
+  // color will display a single plain-text message without any garbled
+  // characters or exposed CSS code.
+  function logWithCss() {
+    var args = [].slice.call(arguments);
+    var consoleArgs = [];
+
+    if (CONSOLE_SUPPORTS_COLOR) {
+      // http://stackoverflow.com/a/13017382/2422398
+      consoleArgs.push(args.map(function(options) {
+        return '%c' + options.text;
+      }).join(''));
+      consoleArgs.push.apply(consoleArgs, args.map(function(options) {
+        return renderCssString(options.css);
+      }));
+      console.log.apply(console, consoleArgs);
+    } else {
+      console.log(args.map(function(options) {
+        return options.text;
+      }).join(''));
+    }
+  }
+
+  function renderCssString(cssDict) {
+    var el = document.createElement('div');
+    Object.keys(cssDict).forEach(function(key) {
+      el.style[key] = cssDict[key];
+    });
+    return el.getAttribute('style');
+  }
 
   // Taken from p5's src/core/error_helpers.js.
   function friendlyWelcome() {
@@ -21,17 +58,24 @@
     var astrixTxtColor = '#ED225D';
     var welcomeBgColor = '#ED225D';
     var welcomeTextColor = 'white';
-    console.log(
-    '%c    _ \n'+
-    ' /\\| |/\\ \n'+
-    ' \\ ` \' /  \n'+
-    ' / , . \\  \n'+
-    ' \\/|_|\\/ '+
-    '\n\n%c> p5.js says: Welcome! '+
-    'This is your friendly debugger. ',
-    'background-color:'+astrixBgColor+';color:' + astrixTxtColor +';',
-    'background-color:'+welcomeBgColor+';color:' + welcomeTextColor +';'
-    );
+
+    logWithCss({
+      text: '    _ \n'+
+            ' /\\| |/\\ \n'+
+            ' \\ ` \' /  \n'+
+            ' / , . \\  \n'+
+            ' \\/|_|\\/ ',
+      css: {
+        background: astrixBgColor,
+        color: astrixTxtColor
+      }
+    }, {
+      text: '\n\n> p5.js says: Welcome! This is your friendly debugger.',
+      css: {
+        background: welcomeBgColor,
+        color: welcomeTextColor
+      }
+    });
   }
 
   function createProxyForClassMethod(classitem, fn) {
