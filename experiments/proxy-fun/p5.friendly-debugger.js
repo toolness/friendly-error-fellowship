@@ -1,6 +1,12 @@
+---
+# We are going to use Jekyll to concatenate all the parts of this
+# experimental library, to keep things at least a little bit modular.
+# For more information, see: http://stackoverflow.com/a/4307177/2422398
+---
+
 (function (root, factory) {
   if (typeof define === 'function' && define.amd)
-    define('p5.dom', ['p5'], function (p5) { (factory(p5));});
+    define('p5.friendly-debugger', ['p5'], function (p5) { (factory(p5));});
   else if (typeof exports === 'object')
     factory(require('../p5'));
   else
@@ -11,45 +17,13 @@
     return;
   }
 
+  {% include_relative _almond.js %}
+  {% include_relative _log-with-css.js %}
+
+  var logWithCss = require('./log-with-css');
+
   var P5_CLASS_RE = /^p5\.([^.]+)$/;
-  var USER_AGENT = typeof(navigator) !== 'undefined' && navigator.userAgent;
-  var CONSOLE_SUPPORTS_COLOR = (
-    // As of 2016-02-13, Microsoft Edge doesn't support console colors.
-    !/Edge\/\d+/.test(USER_AGENT)
-  );
   var docs = getReferenceDocs();
-
-  // Log a chunk of text with multiple CSS styles as a single console
-  // message on browsers that support it. Browsers that don't support
-  // color will display a single plain-text message without any garbled
-  // characters or exposed CSS code.
-  function logWithCss() {
-    var args = [].slice.call(arguments);
-    var consoleArgs = [];
-
-    if (CONSOLE_SUPPORTS_COLOR) {
-      // http://stackoverflow.com/a/13017382/2422398
-      consoleArgs.push(args.map(function(options) {
-        return '%c' + options.text;
-      }).join(''));
-      consoleArgs.push.apply(consoleArgs, args.map(function(options) {
-        return renderCssString(options.css);
-      }));
-      console.log.apply(console, consoleArgs);
-    } else {
-      console.log(args.map(function(options) {
-        return options.text;
-      }).join(''));
-    }
-  }
-
-  function renderCssString(cssDict) {
-    var el = document.createElement('div');
-    Object.keys(cssDict).forEach(function(key) {
-      el.style[key] = cssDict[key];
-    });
-    return el.getAttribute('style');
-  }
 
   // Taken from p5's src/core/error_helpers.js.
   function friendlyWelcome() {
