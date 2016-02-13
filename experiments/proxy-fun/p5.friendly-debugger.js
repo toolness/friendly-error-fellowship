@@ -21,10 +21,11 @@
   {% include_relative _log-with-css.js %}
   {% include_relative _friendly-welcome.js %}
 
+  var docs = {% include_relative data.json %};
+
   var friendlyWelcome = require('./friendly-welcome');
 
   var P5_CLASS_RE = /^p5\.([^.]+)$/;
-  var docs = getReferenceDocs();
 
   function createProxyForClassMethod(classitem, fn) {
     var showHelp = function() {
@@ -102,16 +103,6 @@
         return target[name];
       }
     });
-  }
-
-  function getReferenceDocs() {
-    var req = new XMLHttpRequest();
-
-    // Load synchronously because this is just a prototype. Ideally we
-    // would have a build system in place that bundled everything together.
-    req.open('GET', 'data.json', false);
-    req.send(null);
-    return JSON.parse(req.responseText);
   }
 
   Object.keys(docs.classes).forEach(function(key) {
