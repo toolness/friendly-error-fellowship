@@ -17,7 +17,7 @@
     return;
   }
 
-  {% include_relative _almond.js %}
+  {% include vendor/almond.js %}
 
   define('p5', [], function() { return p5; });
   define('docs', [], function() { return {% include_relative data.json %}; });
