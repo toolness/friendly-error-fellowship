@@ -37,5 +37,8 @@ define('log-with-css', [], function() {
     return el.getAttribute('style');
   }
 
+  // Expose for testing.
+  logWithCss._renderCssString = renderCssString;
+
   return logWithCss;
 });

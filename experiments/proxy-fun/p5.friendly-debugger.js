@@ -29,6 +29,9 @@
   var friendlyWelcome = require('./friendly-welcome');
   var proxify = require('./proxify');
 
+  // Expose for testing.
+  p5._friendlyDebuggerRequire = require;
+
   friendlyWelcome();
   proxify();
 }));

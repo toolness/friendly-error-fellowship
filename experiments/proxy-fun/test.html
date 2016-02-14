@@ -15,9 +15,23 @@
   <script>mocha.setup('bdd')</script>
 
   <script>
+  var _require = p5._friendlyDebuggerRequire;
+
   describe('friendly debugger', function() {
     it('adds a "help" property to p5 functions', function() {
       expect(p5.prototype.createCanvas).to.have.property('help');
+    });
+  });
+
+  describe('logWithCss', function() {
+    var logWithCss = _require('./log-with-css');
+
+    describe('renderCssString', function() {
+      var renderCssString = logWithCss._renderCssString;
+
+      it('renders CSS', function() {
+        expect(renderCssString({color: 'pink'})).to.eql('color: pink;');
+      });
     });
   });
   </script>
