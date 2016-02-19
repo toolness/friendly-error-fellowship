@@ -64,7 +64,10 @@ define('proxify', [
     return new Proxy(proto, {
       get: function(target, name) {
         // TODO: Consider adding a 'did you mean?' message if name is
-        // not in target, as per Ruby 2.3.
+        // not in target, as per Ruby 2.3. This actually might be impossible
+        // given that it seems there's no way to differentiate between a
+        // `'foo' in bar` versus `bar.foo()`, though, which is unfortunate,
+        // as any solution would break duck-typing.
 
         if (name[0] === '_') return target[name];
         if (typeof(target[name]) === 'function' &&
