@@ -24,6 +24,7 @@
 
   {% include_relative _log-with-css.js %}
   {% include_relative _friendly-welcome.js %}
+  {% include_relative _check-arguments.js %}
   {% include_relative _proxify.js %}
 
   var friendlyWelcome = require('./friendly-welcome');

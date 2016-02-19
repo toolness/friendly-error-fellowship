@@ -1,7 +1,8 @@
 define('proxify', [
   'p5',
+  './check-arguments',
   './docs'
-], function(p5, docs) {
+], function(p5, checkArguments, docs) {
   var P5_CLASS_RE = /^p5\.([^.]+)$/;
 
   function createProxyForClassMethod(classitem, fn) {
@@ -17,7 +18,7 @@ define('proxify', [
 
     var handler = {
       apply: function(target, thisArg, argumentsList) {
-        // TODO: Check arguments, provide feedback if needed.
+        checkArguments(target, thisArg, argumentsList, classitem);
         return target.apply(thisArg, argumentsList);
       },
       get: function(target, property) {
