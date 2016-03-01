@@ -62,7 +62,7 @@ first month doing some research and prototyping:
   being confused by it himself and noticing others posting about it
   on the Processing forum.
 * Exploring the error feedback of other friendly systems like
-  Processing 3, [Ruby 2.3][], [Inform 7][], and even [jokes][] to
+  Processing 3, [Ruby 2.3][], [Inform 7][], [Elm][], and even [jokes][] to
   gain further insight on potential solutions.
 * Prototyping innovative ways to make the friendly error system feel
   more like interactive documentation, and less like an intimidating
@@ -189,6 +189,7 @@ teaching and helping beginners ourselves is of core importance.
 [css-selector-game]: http://toolness.github.io/css-selector-game/
 [Ruby 2.3]: http://nithinbekal.com/posts/ruby-2-3-features/#did-you-mean
 [Inform 7]: http://inform7.com/
+[Elm]: http://elm-lang.org/blog/compilers-as-assistants
 [jokes]: https://twitter.com/gafferongames/status/696774357218041856
 [lovebomb.me]: http://lovebomb.me/
 [Data Voyager]: https://bocoup.com/weblog/our-work-with-data-voyager
