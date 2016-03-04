@@ -126,6 +126,11 @@ define('proxify', [
     // version of a class we've proxied in their prototype chains. We need to
     // hack them so that they have the proxied version in their prototype
     // chains, so that the instanceof operator works properly.
+    //
+    // TODO: Technically, we ought to be traversing the whole prototype
+    // chain here, but for now we'll just trust that there aren't any
+    // p5 classes that subclass a non-proxied subclass of a proxied
+    // subclass.
     Object.keys(p5).forEach(function(key) {
       if (!(/^[A-Z]/.test(key) && typeof(p5[key]) === 'function'))
         return;
