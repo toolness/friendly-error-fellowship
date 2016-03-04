@@ -30,6 +30,8 @@
       expect(color).to.be.a(p5.Color);
     });
 
+    // Note that this fails on Firefox due to:
+    // https://bugzilla.mozilla.org/show_bug.cgi?id=888969
     it('creates p5.Renderer2D instances', function() {
       var myp5 = new p5(function() {});
       var elt = document.createElement('canvas');
