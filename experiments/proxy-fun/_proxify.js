@@ -70,6 +70,11 @@ define('proxify', [
 
     proxy = new Proxy(proto, {
       getPrototypeOf: function(target) {
+        // It's possible that we're a subclass of another class that's
+        // proxied. If that's the case, we want to return the *proxied*
+        // prototype rather than the original one, so that the instanceof
+        // operator still works.
+
         var proto = Object.getPrototypeOf(target);
         if (prototypeProxies.has(proto)) {
           return prototypeProxies.get(proto);
@@ -82,6 +87,13 @@ define('proxify', [
         // given that it seems there's no way to differentiate between a
         // `'foo' in bar` versus `bar.foo()`, though, which is unfortunate,
         // as any solution would break duck-typing.
+        //
+        // Note that Gecko did once support a __noSuchMethod__, which
+        // would have been perfect for this, but it's been removed since
+        // the addition of JS proxies. Some details on how to closely
+        // approximate it with proxies can be found in this discussion:
+        //
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=683218
 
         if (name[0] === '_') return target[name];
         if (typeof(target[name]) === 'function' &&
