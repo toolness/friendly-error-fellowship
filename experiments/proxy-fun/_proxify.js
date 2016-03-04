@@ -107,12 +107,11 @@ define('proxify', [
     // The existing p5.Renderer2D.prototype has the *old*
     // p5.Renderer.prototype in its prototype chain. We need to rebuild
     // it so that it has the *new* one in its prototype chain.
-    var oldRenderer2DProto = p5.Renderer2D.prototype;
-
-    p5.Renderer2D.prototype = Object.create(p5.Renderer.prototype);
-
-    Object.keys(oldRenderer2DProto).forEach(function(key) {
-      p5.Renderer2D.prototype[key] = oldRenderer2DProto[key];
+    // Fortunately, we can easily hack the prototype chain via Proxies!
+    p5.Renderer2D.prototype = new Proxy(p5.Renderer2D.prototype, {
+      getPrototypeOf: function(target) {
+        return p5.Renderer.prototype;
+      }
     });
   };
 });
