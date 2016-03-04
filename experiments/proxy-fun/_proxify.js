@@ -4,6 +4,8 @@ define('proxify', [
   './docs'
 ], function(p5, checkArguments, docs) {
   var P5_CLASS_RE = /^p5\.([^.]+)$/;
+  var prototypeProxies = new Map();
+  var proxyPrototypes = new Map();
 
   function createProxyForClassMethod(classitem, fn) {
     var showHelp = function() {
@@ -46,8 +48,12 @@ define('proxify', [
 
   function createProxyForClassPrototype(className, classObj) {
     var proto = classObj.prototype;
+    var proxy;
     var classitemMap = {};
     var methodMap = {};
+
+    if (prototypeProxies.has(proto))
+      throw new Error('proxy already exists for ' + className);
 
     docs.classitems.forEach(function(classitem) {
       // Note that we check for classitem.name because some methods
@@ -62,7 +68,7 @@ define('proxify', [
       }
     });
 
-    return new Proxy(proto, {
+    proxy = new Proxy(proto, {
       get: function(target, name) {
         // TODO: Consider adding a 'did you mean?' message if name is
         // not in target, as per Ruby 2.3. This actually might be impossible
@@ -84,6 +90,11 @@ define('proxify', [
         return target[name];
       }
     });
+
+    prototypeProxies.set(proto, proxy);
+    proxyPrototypes.set(proxy, proto);
+
+    return proxy;
   }
 
   return function proxify() {
@@ -104,14 +115,28 @@ define('proxify', [
       }
     });
 
-    // The existing p5.Renderer2D.prototype has the *old*
-    // p5.Renderer.prototype in its prototype chain. We need to rebuild
-    // it so that it has the *new* one in its prototype chain.
-    // Fortunately, we can easily hack the prototype chain via Proxies!
-    p5.Renderer2D.prototype = new Proxy(p5.Renderer2D.prototype, {
-      getPrototypeOf: function(target) {
-        return p5.Renderer.prototype;
-      }
+    // Some classes, like the existing p5.Renderer2D, have the non-proxied
+    // version of a class we've proxied in their prototype chains. We need to
+    // hack them so that they have the proxied version in their prototype
+    // chains, so that the instanceof operator works properly.
+    Object.keys(p5).forEach(function(key) {
+      if (!(/^[A-Z]/.test(key) && typeof(p5[key]) === 'function'))
+        return;
+
+      var proto = p5[key].prototype;
+      var isProtoProxy = proxyPrototypes.has(proto);
+
+      if (isProtoProxy) return;
+
+      var protoProto = Object.getPrototypeOf(proto);
+
+      if (!prototypeProxies.has(protoProto)) return;
+
+      p5[key].prototype = new Proxy(p5[key].prototype, {
+        getPrototypeOf: function(target) {
+          return prototypeProxies.get(Object.getPrototypeOf(target));
+        }
+      });
     });
   };
 });
