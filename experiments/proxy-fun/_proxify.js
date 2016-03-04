@@ -69,6 +69,13 @@ define('proxify', [
     });
 
     proxy = new Proxy(proto, {
+      getPrototypeOf: function(target) {
+        var proto = Object.getPrototypeOf(target);
+        if (prototypeProxies.has(proto)) {
+          return prototypeProxies.get(proto);
+        }
+        return proto;
+      },
       get: function(target, name) {
         // TODO: Consider adding a 'did you mean?' message if name is
         // not in target, as per Ruby 2.3. This actually might be impossible
