@@ -23,6 +23,14 @@
     });
   });
 
+  describe('proxying', function() {
+    it('creates p5.Color instances', function() {
+      var myp5 = new p5(function() {});
+      var color = myp5.color('blue');
+      expect(color).to.be.a(p5.Color);
+    });
+  });
+
   describe('logWithCss', function() {
     var logWithCss = _require('./log-with-css');
 
