@@ -17,7 +17,7 @@ Other benefits of linking to the source:
 
 Here's what it looks like--the example screenshot below is taken from the documentation for [`plane()`](http://p5js.org/reference/#/p5/plane):
 
-![2016-02-11_8-58-28](https://cloud.githubusercontent.com/assets/124687/12978283/1200414c-d09e-11e5-8a68-4a3adaf97df2.png)
+![Screenshot of linking to documentation source]({{ site.baseurl }}/assets/images/link-to-doc-source.png)
 
 The first link there is to [view the source for `plane()`](https://github.com/processing/p5.js/blob/master/src/3d/3d_primitives.js#L14), while the second is to [edit it](https://github.com/processing/p5.js/edit/master/src/3d/3d_primitives.js#L14) (yay to GitHub for providing permalinks to edit files at a specific line number!). My hope is that beginners who don't know anything about git can fix simple typos and issue PRs for them.
 
