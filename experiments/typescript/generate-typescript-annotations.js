@@ -64,7 +64,7 @@ function validateMethod(classitem) {
   var paramNames = {};
   var optionalParamFound = false;
 
-  if (!JS_SYMBOL_RE.test(classitem.name)) {
+  if (!classitem.is_constructor && !JS_SYMBOL_RE.test(classitem.name)) {
     errors.push('"' + classitem.name + '" is not a valid JS symbol name');
   }
 
@@ -84,6 +84,12 @@ function validateMethod(classitem) {
     if (param.name === 'class') {
       errors.push('param "' + param.name + '" is a reserved word in JS');
     }
+
+    if (!JS_SYMBOL_RE.test(param.name)) {
+      errors.push('param "' + param.name +
+                  '" is not a valid JS symbol name');
+    }
+
     if (!validateType(param.type)) {
       errors.push('param "' + param.name + '" has invalid type: ' +
                   param.type);
@@ -117,13 +123,19 @@ function generateClassMethod(className, classitem) {
   var returnType = classitem.return
                    ? translateType(classitem.return.type)
                    : 'void';
-  var decl = (classitem.static ? 'static ' : '') + classitem.name + '(' +
-             params.join(', ') + '): ' + returnType;
+  var decl;
+
+  if (classitem.is_constructor) {
+    decl = 'constructor(' + params.join(', ') + ')';
+  } else {
+    decl = (classitem.static ? 'static ' : '') + classitem.name + '(' +
+            params.join(', ') + '): ' + returnType;
+  }
 
   if (errors.length) {
     emit.sectionBreak();
-    emit('// TODO: Fix ' + className + '.' + classitem.name +
-        '() errors in ' + classitem.file + ':');
+    emit('// TODO: Fix ' + classitem.name + '() errors in ' +
+         classitem.file + ':');
     emit('//');
     errors.forEach(function(error) {
       emit('//   ' + error);
@@ -134,6 +146,15 @@ function generateClassMethod(className, classitem) {
   } else {
     emit(decl);
   }
+}
+
+function generateClassConstructor(className) {
+  var classitem = yuidocs.classes[className];
+
+  if (!classitem.is_constructor)
+    throw new Error(className + " is not a constructor");
+
+  generateClassMethod(className, classitem);
 }
 
 function generateClassProperty(className, classitem) {
@@ -152,7 +173,6 @@ function generateClassProperty(className, classitem) {
 }
 
 function generateClassProperties(className) {
-  // TODO: Generate constructor.
   getClassitems(className).forEach(function(classitem) {
     emit.setCurrentSourceFile(classitem.file);
     if (classitem.itemtype === 'method') {
@@ -184,6 +204,7 @@ function generateP5Subclass(className) {
        (info.extends ? ' extends ' + info.extends : '') + ' {');
   emit.indent();
 
+  generateClassConstructor(className);
   generateClassProperties(className);
 
   emit.dedent();
