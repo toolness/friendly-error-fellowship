@@ -1,3 +1,4 @@
+var emit = require('./emit')();
 var yuidocs = require('./data.json');
 
 // http://stackoverflow.com/a/2008353/2422398
@@ -26,46 +27,6 @@ var YUIDOC_TO_TYPESCRIPT_PARAM_MAP = {
   // here: https://github.com/Microsoft/TypeScript/issues/3970
   'Function': '() => any',
 };
-
-var emit = (function() {
-  var indentLevel = 0;
-  var lastText = '';
-  var currentSourceFile;
-
-  var emit = function(text) {
-    var indentation = [];
-    for (var i = 0; i < indentLevel; i++) {
-      indentation.push('  ');
-    }
-    console.log(indentation.join('') + text);
-    lastText = text;
-  };
-
-  emit.setCurrentSourceFile = function(file) {
-    if (file !== currentSourceFile) {
-      currentSourceFile = file;
-      emit.sectionBreak();
-      emit('// ' + file);
-      emit.sectionBreak();
-    }
-  };
-
-  emit.sectionBreak = function() {
-    if (lastText !== '' && !/\{$/.test(lastText)) {
-      emit('');
-    }
-  };
-
-  emit.indent = function() {
-    indentLevel++;
-  };
-
-  emit.dedent = function() {
-    indentLevel--;
-  };
-
-  return emit;
-})();
 
 function getClassitems(className) {
   return yuidocs.classitems.filter(function(classitem) {
