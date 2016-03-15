@@ -250,7 +250,7 @@ function generate() {
   emit.dedent();
   emit('}\n');
 
-  emit('declare module p5 {');
+  emit('declare namespace p5 {');
   emit.indent();
 
   p5Subclasses.forEach(generateP5Subclass);
@@ -261,6 +261,8 @@ function generate() {
   emit.close();
 
   emit = createEmitter(__dirname + '/p5.global-mode.d.ts');
+
+  emit('///<reference path="p5.d.ts" />\n');
 
   p5Aliases.forEach(generateP5Properties);
 
