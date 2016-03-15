@@ -1,5 +1,7 @@
-var emit = require('./emit')();
+var createEmitter = require('./emit');
 var yuidocs = require('./data.json');
+
+var emit;
 
 // http://stackoverflow.com/a/2008353/2422398
 var JS_SYMBOL_RE = /^[$A-Z_][0-9A-Z_$]*$/i;
@@ -238,7 +240,9 @@ function generate() {
     }
   });
 
-  emit('class p5 {');
+  emit = createEmitter(__dirname + '/p5.d.ts');
+
+  emit('declare class p5 {');
   emit.indent();
 
   p5Aliases.forEach(generateP5Properties);
@@ -254,7 +258,13 @@ function generate() {
   emit.dedent();
   emit('}\n');
 
+  emit.close();
+
+  emit = createEmitter(__dirname + '/p5.global-mode.d.ts');
+
   p5Aliases.forEach(generateP5Properties);
+
+  emit.close();
 }
 
 module.exports = generate;

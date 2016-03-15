@@ -1,14 +1,22 @@
-function createEmitter() {
+var fs = require('fs');
+
+function createEmitter(filename) {
   var indentLevel = 0;
   var lastText = '';
   var currentSourceFile;
+  var fd = fs.openSync(filename, 'w');
 
   var emit = function(text) {
     var indentation = [];
+    var finalText;
+
     for (var i = 0; i < indentLevel; i++) {
       indentation.push('  ');
     }
-    console.log(indentation.join('') + text);
+
+    finalText = indentation.join('') + text + '\n';
+    fs.writeSync(fd, finalText);
+
     lastText = text;
   };
 
@@ -38,6 +46,12 @@ function createEmitter() {
   emit.dedent = function() {
     indentLevel--;
   };
+
+  emit.close = function() {
+    fs.closeSync(fd);
+  };
+
+  emit('// This file was auto-generated. Please do not edit it.\n');
 
   return emit;
 }
