@@ -132,6 +132,10 @@ function generateClassMethod(className, classitem) {
             params.join(', ') + '): ' + returnType;
   }
 
+  if (emit.getIndentLevel() === 0) {
+    decl = 'declare function ' + decl + ';';
+  }
+
   if (errors.length) {
     emit.sectionBreak();
     emit('// TODO: Fix ' + classitem.name + '() errors in ' +
@@ -158,11 +162,18 @@ function generateClassConstructor(className) {
 }
 
 function generateClassProperty(className, classitem) {
+  var decl;
+
   if (JS_SYMBOL_RE.test(classitem.name)) {
     // TODO: It seems our properties don't carry any type information,
     // which is unfortunate. YUIDocs supports the @type tag on properties,
     // and even encourages using it, but we don't seem to use it.
-    emit(classitem.name + ': any');
+    decl = classitem.name + ': any';
+    if (emit.getIndentLevel() === 0) {
+      emit('declare var ' + decl + ';');
+    } else {
+      emit(decl);
+    }
   } else {
     emit.sectionBreak();
     emit('// TODO: Property "' + classitem.name +
@@ -242,6 +253,8 @@ function generate() {
 
   emit.dedent();
   emit('}\n');
+
+  p5Aliases.forEach(generateP5Properties);
 }
 
 module.exports = generate;

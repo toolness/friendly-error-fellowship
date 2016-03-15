@@ -27,6 +27,10 @@ function createEmitter() {
     }
   };
 
+  emit.getIndentLevel = function() {
+    return indentLevel;
+  };
+
   emit.indent = function() {
     indentLevel++;
   };
