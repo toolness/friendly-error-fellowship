@@ -5,6 +5,7 @@ var yuidocs = require('./data.json');
 var JS_SYMBOL_RE = /^[$A-Z_][0-9A-Z_$]*$/i;
 
 var P5_CLASS_RE = /^p5\.([^.]+)$/;
+
 var P5_ALIASES = [
   'p5',
   // These are supposedly "classes" in our docs, but they don't exist
@@ -12,6 +13,7 @@ var P5_ALIASES = [
   'p5.dom',
   'p5.sound'
 ];
+
 var YUIDOC_TO_TYPESCRIPT_PARAM_MAP = {
   // TODO: Not sure if there's a better type for generic Objects...
   'Object': 'any',
