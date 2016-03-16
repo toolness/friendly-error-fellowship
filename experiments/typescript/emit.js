@@ -1,5 +1,14 @@
 var fs = require('fs');
 
+function shortenDescription(desc) {
+  var match = desc.match(/^((.|\n)+?\.)\s/);
+
+  if (match) {
+    return match[1];
+  }
+  return desc;
+}
+
 function createEmitter(filename) {
   var indentLevel = 0;
   var lastText = '';
@@ -18,6 +27,19 @@ function createEmitter(filename) {
     fs.writeSync(fd, finalText);
 
     lastText = text;
+  };
+
+  emit.description = function(desc) {
+    if (!desc) {
+      return;
+    }
+
+    emit.sectionBreak();
+    emit('/**');
+    shortenDescription(desc).split('\n').forEach(function(line) {
+      emit(' * ' + line);
+    });
+    emit(' */');
   };
 
   emit.setCurrentSourceFile = function(file) {

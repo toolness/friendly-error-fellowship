@@ -150,6 +150,7 @@ function generateClassMethod(className, classitem) {
     emit('// ' + decl);
     emit('');
   } else {
+    emit.description(classitem.description);
     emit(decl);
   }
 }
@@ -171,6 +172,9 @@ function generateClassProperty(className, classitem) {
     // which is unfortunate. YUIDocs supports the @type tag on properties,
     // and even encourages using it, but we don't seem to use it.
     decl = classitem.name + ': any';
+
+    emit.description(classitem.description);
+
     if (emit.getIndentLevel() === 0) {
       emit('declare var ' + decl + ';');
     } else {
