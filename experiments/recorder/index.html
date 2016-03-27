@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>p5 recorder test</title>
+<h1>p5 recorder test</h1>
+<textarea id="recording" cols="80" rows="20" spellcheck="false"></textarea>
+<p><button id="replay" disabled>Play Recording</button></p>
+<!-- From https://github.com/stacktracejs/stackframe -->
+<script src="vendor/stackframe.js"></script>
+<!-- From https://github.com/stacktracejs/error-stack-parser -->
+<script src="vendor/error-stack-parser.js"></script>
+<script src="vendor/p5.js"></script>
+<script src="p5.recorder.js"></script>
+<script src="vendor/p5.play.js"></script>
+<script>
+var replayButton = document.getElementById('replay');
+var recordingTextArea = document.getElementById('recording');
+
+function bounceSketch(sketch) {
+  // This is mostly based off of:
+  //
+  // https://github.com/molleindustria/p5.play/pull/51#issuecomment-199556091
+
+  var s, g, ball;
+  var angle = 1.0;
+
+  sketch.setup = function setup() {
+    sketch.startRecording();
+    sketch.createCanvas(400, 400);
+    g = new sketch.Group();
+
+    s = sketch.createSprite(100, 100, 0, 0);
+    s.setCollider('circle', 0, 0, 50);
+    s.immovable = true;
+    s.debug = true;
+    g.add(s);
+
+    s = sketch.createSprite(300, 300, 0, 0);
+    s.setCollider('circle', 0, 0, 50);
+    s.immovable = true;
+    s.debug = true;
+    g.add(s);
+
+    ball = sketch.createSprite(200, 200, 0, 0);
+    ball.setCollider('circle', 0, 0, 10);
+    ball.debug = true;
+    ball.velocity.x = 25;
+    ball.velocity.y = 25;
+
+    positionWalls();
+  };
+
+  function positionWalls() {
+      g[0].position.x = Math.sin(angle) * 100 + 200;
+      g[0].position.y = Math.cos(angle) * 100 + 200;
+
+      g[1].position.x = Math.sin(angle) * -100 + 200;
+      g[1].position.y = Math.cos(angle) * -100 + 200;
+  }
+
+  sketch.draw = function draw() {
+    sketch.background('#fff');
+    ball.bounce(g);
+    sketch.drawSprites();
+
+    if (ball.position.x > 400 || ball.position.y > 400 || ball.position.x < 0 || ball.position.y < 0) {
+        ball.position.x = 200;
+        ball.position.y = 200;
+        ball.velocity.x = 0;
+        ball.velocity.y = 0;
+        ball.addSpeed(5, (angle * -180 / p5.prototype.PI) + 90);
+    }
+
+    if (sketch.frameCount === 40) {
+      sketch.noLoop();
+      sketch.stopRecording();
+      recordingTextArea.value = sketch.getRecording();
+      replayButton.disabled = false;
+    }
+  };
+}
+
+var myp5 = new p5(bounceSketch);
+
+replayButton.onclick = function() {
+  if (myp5) {
+    myp5.remove();
+    myp5 = null;
+  }
+
+  myp5 = new p5(function(sketch) {
+    with (sketch) {
+      eval(recordingTextArea.value);
+    }
+
+    sketch['setup'] = eval('setup');
+    sketch['draw'] = eval('draw');
+  });
+};
+</script>
