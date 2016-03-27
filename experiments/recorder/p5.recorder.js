@@ -32,6 +32,9 @@ factory(root['p5']);
 
       if (this._isRecording) {
         stackFrame = getCallerStackFrame();
+
+        // Note that we don't want to record p5's own
+        // internal calls to itself.
         if (!/p5\.js/.test(stackFrame.fileName)) {
           this._recording.current.push({
             method: prop,
