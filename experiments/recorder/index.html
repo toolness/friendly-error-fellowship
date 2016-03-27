@@ -1,7 +1,28 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<title>p5 recorder test</title>
-<h1>p5 recorder test</h1>
+<title>p5 Recorder Experiment</title>
+<h1>p5 Recorder Experiment</h1>
+<p>
+  This is an experiment to see if it's possible to "record" the
+  drawing commands made to p5 during a sketch and "replay" them
+  in a way that's completely independent of the original sketch. Kind
+  of like a p5-powered "movie".
+</p>
+<p>
+  It is potentially a solution to testing collision mechanics and other
+  such functionality in p5.play, as described in 
+  <a href="https://github.com/molleindustria/p5.play/pull/51#issuecomment-200844153">p5.play#51</a>.
+</p>
+<p>
+  This page works by executing the following sketch for a fixed number
+  of frames, and recording its drawing commands:
+</p>
+<textarea id="sketch" cols="80" rows="20" readonly spellcheck="false"></textarea>
+<div id="sketch-holder" style="min-height: 400px"></div>
+<p>
+  Once your browser finishes recording the sketch, the recording's
+  source code will be displayed below.
+</p>
 <textarea id="recording" cols="80" rows="20" spellcheck="false"></textarea>
 <p><button id="replay" disabled>Play Recording</button></p>
 <!-- From https://github.com/stacktracejs/stackframe -->
@@ -11,10 +32,7 @@
 <script src="vendor/p5.js"></script>
 <script src="p5.recorder.js"></script>
 <script src="vendor/p5.play.js"></script>
-<script>
-var replayButton = document.getElementById('replay');
-var recordingTextArea = document.getElementById('recording');
-
+<script id="sketch-src">
 function bounceSketch(sketch) {
   // This is mostly based off of:
   //
@@ -78,8 +96,14 @@ function bounceSketch(sketch) {
     }
   };
 }
-
-var myp5 = new p5(bounceSketch);
+</script>
+<script>
+var replayButton = document.getElementById('replay');
+var recordingTextArea = document.getElementById('recording');
+var sketchHolder = document.getElementById('sketch-holder');
+var sketchScript = document.getElementById('sketch-src');
+var sketchTextArea = document.getElementById('sketch');
+var myp5 = new p5(bounceSketch, sketchHolder);
 
 replayButton.onclick = function() {
   if (myp5) {
@@ -94,6 +118,10 @@ replayButton.onclick = function() {
 
     sketch['setup'] = eval('setup');
     sketch['draw'] = eval('draw');
-  });
+  }, sketchHolder);
+};
+
+onload = function() {
+  sketchTextArea.value = sketchScript.textContent.trim();
 };
 </script>
