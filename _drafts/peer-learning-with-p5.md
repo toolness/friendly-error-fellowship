@@ -7,7 +7,7 @@ categories: general
 
 I have always been a tinkerer, I love to craft - Pinterest is my jam, but with coding I’ve really never felt like I have been able to get to a place where I could tinker. [Atul](https://twitter.com/toolness) convinced me to apply for this fellowship because it would give me a chance to experiment and learn p5 in order to tinker with code in a lightweight way, so that we could help other designers and artists who, like me, might be enthusiastic but just a bit overwhelmed with code. 
 
-The way that I approached learning p5 was pretty simple. I started by watching [Dan Shiffman’s videos](https://www.youtube.com/watch?v=8j0UDiN7my4&index=1&list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFAhttps://www.youtube.com/watch?v=8j0UDiN7my4&index=1&list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA) on youtube. They are great tutorials and super funny. Atul and I watched together, and then when I reached a point where I felt like I could try something, I would stop and make something in [codepen](http://codepen.io/). I chose codepen because it was a great environment for me to prototype an idea and then share it with Atul, so that he could then provide me mentorship directly in the code, or if we weren’t physically next to each other, with [Screenhero](https://screenhero.com/).  
+The way that I approached learning p5 was pretty simple. I started by watching [Dan Shiffman’s videos](https://www.youtube.com/watch?v=8j0UDiN7my4&index=1&list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFAhttps://www.youtube.com/watch?v=8j0UDiN7my4&index=1&list=PLRqwX-V7Uu6Zy51Q-x9tMWIv9cueOFTFA) on YouTube. They are great tutorials and super funny. Atul and I watched together, and then when I reached a point where I felt like I could try something, I would stop and make something in [codepen](http://codepen.io/). I chose codepen because it was a great environment for me to prototype an idea and then share it with Atul, so that he could then provide me mentorship directly in the code, or if we weren’t physically next to each other, with [Screenhero](https://screenhero.com/).  
 
 My first little project that I made for myself was designing a lumberjack. I don’t know where the idea came from, but I just went for it. Like most of my projects, I started by sketching in my notebook. 
 
@@ -43,6 +43,6 @@ I’m now wondering how I might improve this exact experience for learners. Here
 </li>
 </ul>
 
-That’s where I’m at now. I am going to work a bit on tackling these ideas with Atul and the p5 team and continue to build out the animations for the lumberjack. I’d love to hear from you. As a learner, have you experimented with peer learning through pair programming or like in my case, peer binge watching youtube tutorials? <em>What has been an effective learning technique or tool for you?</em>
+That’s where I’m at now. I am going to work a bit on tackling these ideas with Atul and the p5 team and continue to build out the animations for the lumberjack. I’d love to hear from you. As a learner, have you experimented with peer learning through pair programming or like in my case, peer binge watching YouTube tutorials? <em>What has been an effective learning technique or tool for you?</em>
 
 
