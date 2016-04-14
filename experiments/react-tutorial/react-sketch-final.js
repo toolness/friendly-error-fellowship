@@ -13,9 +13,8 @@ var Sketch = React.createClass({
     this.setState({fill: 'white'});
   },
   handleMouseMove: function(event) {
-    var oldCircles = this.state.circles;
     this.setState({
-      circles: oldCircles.concat({
+      circles: this.state.circles.concat({
         key: this.state.nextId,
         cx: event.clientX,
         cy: event.clientY,
@@ -27,17 +26,15 @@ var Sketch = React.createClass({
     });
   },
   render: function() {
-    var circles = this.state.circles.map(function(circle) {
-      return React.createElement('circle', circle);
-    });
-
     return React.createElement('svg', {
       width: 640,
       height: 480,
       onMouseMove: this.handleMouseMove,
       onMouseUp: this.handleMouseUp,
       onMouseDown: this.handleMouseDown
-    }, circles);
+    }, this.state.circles.map(function(circle) {
+      return React.createElement('circle', circle);
+    }));
   }
 });
 
