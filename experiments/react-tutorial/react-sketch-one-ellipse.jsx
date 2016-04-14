@@ -9,6 +9,6 @@ var Sketch = React.createClass({
 });
 
 ReactDOM.render(
-  React.createElement(Sketch),
+  <Sketch/>,
   document.getElementById('sketch')
 );
