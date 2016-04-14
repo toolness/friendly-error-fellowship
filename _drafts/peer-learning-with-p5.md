@@ -15,7 +15,7 @@ My first little project that I made for myself was designing a lumberjack. I don
 
 This helped me to think through how I could break down my concept into shapes, which I could then reference in the documentation section on the p5 site. 
 
-[[[[INSERT ELLIPSE DOC SS ]]]]
+![p5 ellipse reference doc](https://github.com/toolness/friendly-error-fellowship/blob/gh-pages/assets/images/ref.png)
 
 The first thing that I realized was a challenge for me was understanding the canvas. It’s basically the first thing that you do when you start a sketch in p5, and I get the general size of the container that I’m working in, but when I was making shapes, I was ballparking it - almost as if I had imaginary rulers on the page guiding my designs. Once I got the hang of that, the project became an exercise in deconstructing my composition into shapes and practicing how they work together, in groups, alone, overlapped, with different opacities, etc. 
 
