@@ -21,7 +21,7 @@ The first thing that I realized was a challenge for me was understanding the can
 
 As I worked, Atul encouraged me to keep my thoughts about how to improve the tools in a notebook, so that once I mastered the technical skills, we prototype making the user experience better for learners. My notes are pretty simple, they look like this: 
 
-[[[[ INSERT EVERNOTE SS]]]]]
+![evernote list](https://github.com/toolness/friendly-error-fellowship/blob/gh-pages/assets/images/evernote.png)
 
 Here’s what the Lumberjack looks like right now. You can check it out [on my codepen](http://codepen.io/iamjessklein/pen/wGJMLE?editors=0010). It even has a little animation - with a wink that I threw in there! 
 
