@@ -25,7 +25,8 @@ As I worked, Atul encouraged me to keep my thoughts about how to improve the too
 
 Here’s what the Lumberjack looks like right now. You can check it out [on my codepen](http://codepen.io/iamjessklein/pen/wGJMLE?editors=0010). It even has a little animation - with a wink that I threw in there! 
 
-![winking lumberjack gif](https://github.com/toolness/friendly-error-fellowship/blob/gh-pages/assets/images/lumberjackwink.gif)
+<p data-height="266" data-theme-id="dark" data-slug-hash="wGJMLE" data-default-tab="js,result" data-user="iamjessklein" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/iamjessklein/pen/wGJMLE/">Lumberjack</a> by Jess (<a href="http://codepen.io/iamjessklein">@iamjessklein</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 
 At this point all of my notes that I created from this exercise have been converted into github issues in the p5 repo, or p5 website repo.  So, the question of the day:was I able to feel like I was tinkering with p5? Yes. I think that the reason why was that I was able to start and end small. I wasn’t building an application or website, just a simple illustration. It’s something that I was able to do by myself, but the learning experience was greatly improved by having a more advanced learner such as Atul by my side. The resources on the p5 website are great, I ended up supplementing them a bit with [Getting Started with p5.js](http://shop.oreilly.com/product/0636920032076.do) by Lauren McCarthy, Casey Reas and Ben Fry. 
 
