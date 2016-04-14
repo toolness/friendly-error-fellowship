@@ -30,13 +30,11 @@ var Sketch = React.createClass({
     });
 
     return React.createElement('svg', {
+      width: 640,
+      height: 480,
       onMouseMove: this.handleMouseMove,
       onMouseUp: this.handleMouseUp,
-      onMouseDown: this.handleMouseDown,
-      style: {
-        width: '640px',
-        height: '480px'
-      }
+      onMouseDown: this.handleMouseDown
     }, circles);
   }
 });
