@@ -11,7 +11,7 @@ The way that I approached learning p5 was pretty simple. I started by watching [
 
 My first little project that I made for myself was designing a lumberjack. I don’t know where the idea came from, but I just went for it. Like most of my projects, I started by sketching in my notebook. 
 
-[[[[INSERT IMAGE OF NOTEBOOK SKETCH]]]]
+![notebook doodle of lumberjack](https://github.com/toolness/friendly-error-fellowship/blob/gh-pages/assets/images/lumberdoodle.jpg)
 
 This helped me to think through how I could break down my concept into shapes, which I could then reference in the documentation section on the p5 site. 
 
