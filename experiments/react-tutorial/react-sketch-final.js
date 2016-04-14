@@ -6,24 +6,29 @@ var Sketch = React.createClass({
       nextId: 1
     };
   },
-  handleMouseDown: function(event) {
-    this.setState({fill: 'black'});
-  },
-  handleMouseUp: function(event) {
-    this.setState({fill: 'white'});
-  },
-  handleMouseMove: function(event) {
+  createCircle: function(x, y, newFill) {
+    if (!newFill) newFill = this.state.fill;
     this.setState({
       circles: this.state.circles.concat({
         key: this.state.nextId,
-        cx: event.clientX,
-        cy: event.clientY,
+        cx: x,
+        cy: y,
         r: 50,
         stroke: 'black',
-        fill: this.state.fill
+        fill: newFill
       }),
+      fill: newFill,
       nextId: this.state.nextId + 1
     });
+  },
+  handleMouseDown: function(event) {
+    this.createCircle(event.clientX, event.clientY, 'black');
+  },
+  handleMouseUp: function(event) {
+    this.createCircle(event.clientX, event.clientY, 'white');
+  },
+  handleMouseMove: function(event) {
+    this.createCircle(event.clientX, event.clientY);
   },
   render: function() {
     return React.createElement('svg', {
