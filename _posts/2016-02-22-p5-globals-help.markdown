@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Using p5 Globals in Top-Level Code"
-date:   2016-02-22 21:05:19 +0000
+date:   2016-02-22
 categories: general
 ---
 One of the unintuitive aspects of p5 that beginners often make is using

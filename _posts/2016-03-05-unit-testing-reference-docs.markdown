@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Unit Testing Reference Documentation"
-date:   2016-03-05 10:48:19 +0000
+date:   2016-03-05
 categories: general
 ---
 Part of the work of the Friendly Error Fellowship involves resurrecting

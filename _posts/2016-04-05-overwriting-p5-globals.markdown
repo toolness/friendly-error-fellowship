@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Overwriting p5 Globals"
-date:   2016-04-05 10:48:19 +0000
+date:   2016-04-05
 categories: general
 ---
 It turns out that one of the problems with having global functions

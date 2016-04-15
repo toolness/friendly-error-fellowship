@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Towards Zero Errors"
-date:   2016-02-12 21:05:19 +0000
+date:   2016-02-12
 categories: general
 ---
 What's better than friendly errors? *Zero* errors! We can help ensure this if we have accurate documentation.

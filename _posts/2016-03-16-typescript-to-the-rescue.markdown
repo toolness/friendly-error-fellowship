@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "TypeScript to the Rescue"
-date:   2016-03-16 10:48:19 +0000
+date:   2016-03-16
 categories: general
 ---
 
