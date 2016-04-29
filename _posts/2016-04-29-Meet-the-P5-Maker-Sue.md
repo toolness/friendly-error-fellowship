@@ -9,8 +9,6 @@ Twitter Handle: @deathbearbrown
 Occupation: Open Web Developer
 What she makes with p5: Experimental Art
 
----
-
 Sue learned about p5 from her colleague at Bocoup, a open web consultancy. Her colleague shared an experimental drawing application (making a realistic pencil stroke) at a staff show and tell. Sue was inspired and embarked on her own tinkering journey. As an Engineer, she came to p5 with quite a bit of past coding experience. In fact, Sue used processing.js  when she was in graduate school. At that time she was interested in manipulating datasets and crafting data visualizations. 
 
 Q: What do you like about p5?
@@ -40,7 +38,7 @@ Most of my problems with p5 aren’t errors. It’s working fine but it’s just
 
 Here are some projects that Sue has made with P5:
 
-<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I didn&#39;t set randomSeed() <a href="https://t.co/f6LzlQKR14">pic.twitter.com/f6LzlQKR14</a></p>&mdash; You just got Sue&#39;d (@deathbearbrown) <a href="https://twitter.com/deathbearbrown/status/700823766700417024">February 19, 2016</a></blockquote>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr">I didn&#39;t set randomSeed() <a href="https://t.co/f6LzlQKR14">pic.twitter.com/f6LzlQKR14</a></p>&mdash; You just got Sue&#39;d (@deathbearbrown) <a href="https://twitter.com/deathbearbrown/status/700823766700417024">February 19, 2016</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
